@@ -162,11 +162,21 @@ export function createApp(service = new JobService(SETTINGS), { corsOrigins = nu
   };
 }
 
-export function startServer({ host = process.env.HOST || "127.0.0.1", port = Number(process.env.PORT || 8000), service } = {}) {
+export function startServer({
+  host = process.env.HOST || "0.0.0.0",
+  port = Number(process.env.PORT || 8000),
+  service
+} = {}) {
   const server = http.createServer(createApp(service));
-  return new Promise((resolve) => server.listen(port, host, () => resolve(server)));
-}
 
+  return new Promise((resolve, reject) => {
+    server.once("error", reject);
+    server.listen(port, host, () => {
+      server.removeListener("error", reject);
+      resolve(server);
+    });
+  });
+}
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   startServer().then((s) => {
     const a = s.address();
