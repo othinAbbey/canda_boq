@@ -1,0 +1,14 @@
+# YOUR RATE BOOK. Rates are deliberately blank: fill them from your own
+# sources (supplier quotes, past BOQs, price books) and keep date + source.
+# A blank rate leaves the BOQ line unpriced; nothing is ever guessed.
+# item_code may end in * to cover a family (e.g. OPN-DOOR-*).
+item_code,description,unit,rate,currency,region,date,source
+FIN-FLOOR-TILE,Floor tiles supplied and laid,m2,,UGX,Kampala,,
+FIN-FLOOR-TILE-WET,Floor tiles to wet areas,m2,,UGX,Kampala,,
+FIN-FLOOR-TILE-EXT,Floor tiles to balconies / terraces,m2,,UGX,Kampala,,
+FIN-CEIL-PAINT,Paint to ceilings,m2,,UGX,Kampala,,
+FIN-SKIRTING,Skirting,m,,UGX,Kampala,,
+FIN-PLASTER-INT,Internal wall plaster,m2,,UGX,Kampala,,
+FIN-PAINT-INT,Paint to internal walls,m2,,UGX,Kampala,,
+OPN-DOOR-*,Door supplied and fixed (by mark),nr,,UGX,Kampala,,
+OPN-WINDOW-*,Window supplied and fixed (by mark),nr,,UGX,Kampala,,

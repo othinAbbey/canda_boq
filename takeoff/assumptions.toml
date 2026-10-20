@@ -1,0 +1,56 @@
+# ---------------------------------------------------------------------------
+# TAKEOFF ASSUMPTIONS
+# These are placeholders so the program runs. Review every value for every
+# project: they change the quantities directly.
+# ---------------------------------------------------------------------------
+
+[geometry]
+wall_height_mm = 3000        # fallback when a room's level matches no rule below
+opening_deduct_min_m2 = 0.5  # deduct doors/windows at least this large
+
+# Clear internal wall height by level (first matching rule wins; keywords are
+# matched against the level / view title, case-insensitive).
+# Values read off Section 1 of the house_plan drawing (2,950 below the first
+# floor slab, 3,000 below the roof slab). VERIFY against your drawings.
+[[level_heights]]
+keywords = ["ground", "g-floor", "g floor", "level 1"]
+height_mm = 2950
+
+[[level_heights]]
+keywords = ["first", "1st", "level 2"]
+height_mm = 3000
+
+# Areas that are labelled on the plan but get no floor finish, plaster or
+# paint: voids, stairs and shafts. Whole-word, case-insensitive match on the
+# room name. ("VIOD" is the spelling on the house_plan drawing.)
+[exclude_rooms]
+keywords = ["void", "viod", "stair", "stairs", "staircase", "up", "dn",
+            "shaft", "open to below"]
+
+[waste]                      # percent added to the measured quantity
+floor_finish_pct = 5
+paint_pct = 5
+
+# First matching rule wins (case-insensitive substring of the room name).
+[[floor_rules]]
+keywords = ["wc", "bath", "sh", "toilet", "shower"]
+item = "FIN-FLOOR-TILE-WET"
+
+[[floor_rules]]
+keywords = ["balcony", "terrace", "porch", "seating"]
+item = "FIN-FLOOR-TILE-EXT"
+
+[floor_default]
+item = "FIN-FLOOR-TILE"
+
+# Which section of the BOQ an item code belongs to (by prefix).
+[sections]
+"FIN" = "Finishes"
+"OPN" = "Doors and windows"
+
+# Added on top of the priced subtotal. Set per project; 0 means "not applied".
+# Check the current tax rate that applies to your contract before using it.
+[commercial]
+preliminaries_pct = 0.0
+contingency_pct = 0.0
+tax_pct = 0.0
